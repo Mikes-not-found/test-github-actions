@@ -135,6 +135,168 @@
     color: #fff;
   }
 
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+    position: relative;
+  }
+
+  .hamburger-line {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: absolute;
+  }
+
+  .hamburger-line:nth-child(1) {
+    top: 10px;
+  }
+
+  .hamburger-line:nth-child(2) {
+    top: 18px;
+  }
+
+  .hamburger-line:nth-child(3) {
+    top: 26px;
+  }
+
+  .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+    top: 18px;
+    transform: rotate(45deg);
+  }
+
+  .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+    top: 18px;
+    transform: rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 350px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    transition: right 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    overflow-y: auto;
+    padding: 80px 0 2rem;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-nav-links li {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu.active .mobile-nav-links li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+  .mobile-menu.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+  .mobile-menu.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+  .mobile-menu.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+
+  .mobile-nav-links a {
+    display: block;
+    padding: 1.5rem 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-nav-links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-nav-links a:hover::before,
+  .mobile-nav-links a:focus::before {
+    transform: scaleY(1);
+  }
+
+  .mobile-nav-links a:hover,
+  .mobile-nav-links a:focus {
+    background: rgba(99, 102, 241, 0.1);
+    padding-left: 2.5rem;
+  }
+
+  /* Hide desktop nav on mobile, show mobile button */
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+  }
+
   /* Hero Section with Parallax */
   .hero {
     min-height: 100vh;
@@ -1279,15 +1441,44 @@
 <nav [class.nav-scrolled]="scrollY() > 50">
   <div class="nav-content">
     <div class="logo">MS</div>
-    <ul class="nav-links">
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-links desktop-nav">
       <li><a (click)="scrollToSection('home')" (keydown.enter)="scrollToSection('home')" tabindex="0" role="button">Home</a></li>
       <li><a (click)="scrollToSection('about')" (keydown.enter)="scrollToSection('about')" tabindex="0" role="button">About</a></li>
       <li><a (click)="scrollToSection('experience')" (keydown.enter)="scrollToSection('experience')" tabindex="0" role="button">Experience</a></li>
       <li><a (click)="scrollToSection('projects')" (keydown.enter)="scrollToSection('projects')" tabindex="0" role="button">Projects</a></li>
       <li><a (click)="scrollToSection('contact')" (keydown.enter)="scrollToSection('contact')" tabindex="0" role="button">Contact</a></li>
     </ul>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen()" aria-label="Toggle menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay"
+     [class.active]="mobileMenuOpen()"
+     (click)="closeMobileMenu()"
+     (keydown.escape)="closeMobileMenu()"
+     tabindex="-1"
+     role="button"
+     aria-label="Close menu"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" [class.active]="mobileMenuOpen()">
+  <ul class="mobile-nav-links">
+    <li><a (click)="scrollToSection('home')" (keydown.enter)="scrollToSection('home')" tabindex="0" role="button">Home</a></li>
+    <li><a (click)="scrollToSection('about')" (keydown.enter)="scrollToSection('about')" tabindex="0" role="button">About</a></li>
+    <li><a (click)="scrollToSection('experience')" (keydown.enter)="scrollToSection('experience')" tabindex="0" role="button">Experience</a></li>
+    <li><a (click)="scrollToSection('projects')" (keydown.enter)="scrollToSection('projects')" tabindex="0" role="button">Projects</a></li>
+    <li><a (click)="scrollToSection('contact')" (keydown.enter)="scrollToSection('contact')" tabindex="0" role="button">Contact</a></li>
+  </ul>
+</div>
 
 <section class="hero" id="home">
   <div class="hero-bg"></div>

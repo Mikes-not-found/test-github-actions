@@ -48,6 +48,7 @@ export class App implements OnInit {
   protected readonly role = signal('Full Stack Developer & Software Engineer');
   protected readonly environment = signal(this.getEnvironment());
   protected scrollY = signal(0);
+  protected mobileMenuOpen = signal(false);
   protected readonly professionalSummary = signal('Passionate Full Stack Developer with expertise in modern web technologies, cloud-native architectures, and DevOps methodologies. Specialized in building scalable, high-performance applications using Angular, React, Node.js, and Java Spring Framework.');
 
   protected readonly projects = signal<Project[]>([
@@ -234,5 +235,14 @@ export class App implements OnInit {
   scrollToSection(sectionId: string): void {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+    this.closeMobileMenu();
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen.set(!this.mobileMenuOpen());
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
   }
 }
