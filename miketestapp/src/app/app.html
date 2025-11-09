@@ -1117,11 +1117,13 @@
     font-weight: 600;
   }
 
-  .certifications {
+  .certifications,
+  .education-section {
     margin-top: 4rem;
   }
 
-  .cert-grid {
+  .cert-grid,
+  .education-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -1178,6 +1180,52 @@
 
   .cert-link:hover {
     background: rgba(255,255,255,0.3);
+  }
+
+  .education-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 2px solid rgba(99, 102, 241, 0.1);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(16, 185, 129, 0.2);
+  }
+
+  .education-degree {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .education-institution {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .education-period {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.3rem;
+  }
+
+  .education-location {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .education-description {
+    color: var(--gray);
+    line-height: 1.6;
   }
 
   @media (max-width: 968px) {
@@ -1253,15 +1301,14 @@
     <h1>{{ name() }}</h1>
     <h2>{{ role() }}</h2>
     <p>
-      Creo esperienze digitali straordinarie con codice pulito e design accattivante.
-      Trasformo idee in soluzioni innovative che fanno la differenza.
+      {{ professionalSummary() }}
     </p>
     <div class="cta-buttons">
       <button class="btn btn-primary" (click)="scrollToSection('projects')">
-        Esplora Progetti
+        Explore Projects
       </button>
       <button class="btn btn-outline" (click)="scrollToSection('contact')">
-        Contattami
+        Get In Touch
       </button>
     </div>
   </div>
@@ -1269,24 +1316,25 @@
 
 <section id="about">
   <div class="about-container">
-    <h2 class="section-title reveal">Chi Sono</h2>
+    <h2 class="section-title reveal">About Me</h2>
     <div class="about-content">
       <div class="about-text reveal">
-        <h3>Passione per il Codice</h3>
+        <h3>Passion for Code</h3>
         <p>
-          Sono un Full Stack Developer con una forte passione per la creazione di applicazioni web moderne,
-          scalabili e performanti. Mi specializzo in architetture cloud-native e metodologie DevOps.
+          Full Stack Developer with a strong passion for creating modern, scalable, and high-performance web applications.
+          I specialize in cloud-native architectures and DevOps methodologies, delivering enterprise-level solutions.
         </p>
         <p>
-          Ogni progetto è un'opportunità per apprendere nuove tecnologie e perfezionare le mie competenze.
-          Credo fermamente nel potere del codice pulito e della collaborazione di team.
+          Every project is an opportunity to learn new technologies and refine my skills.
+          I strongly believe in the power of clean code, best practices, and effective team collaboration.
         </p>
         <p>
-          La mia missione è trasformare problemi complessi in soluzioni eleganti che gli utenti amano utilizzare.
+          My mission is to transform complex problems into elegant solutions that users love to interact with,
+          combining technical excellence with user-centered design.
         </p>
       </div>
       <div class="skills-container reveal">
-        <h3>Competenze Tecniche</h3>
+        <h3>Technical Skills</h3>
         <div class="skills-grid">
           @for (skill of skills(); track skill) {
             <div class="skill-tag">{{ skill }}</div>
@@ -1301,7 +1349,7 @@
   <div class="experience-container">
     <div class="experience-header reveal">
       <img [src]="profileImage" [alt]="name() + ' profile picture'" class="profile-image" />
-      <h2 class="section-title">Esperienza Professionale</h2>
+      <h2 class="section-title">Professional Experience</h2>
     </div>
 
     <div class="timeline">
@@ -1327,7 +1375,7 @@
     </div>
 
     <div class="certifications reveal">
-      <h3 class="section-title">Certificazioni</h3>
+      <h3 class="section-title">Certifications</h3>
       <div class="cert-grid">
         @for (cert of certifications(); track cert.name) {
           <div class="cert-card">
@@ -1337,19 +1385,38 @@
             <div class="cert-date">{{ cert.date }}</div>
             @if (cert.credentialUrl) {
               <a [href]="cert.credentialUrl" target="_blank" rel="noopener" class="cert-link">
-                Visualizza Credenziale →
+                View Credential →
               </a>
             }
           </div>
         }
       </div>
     </div>
+
+    @if (education().length > 0) {
+      <div class="education-section reveal">
+        <h3 class="section-title">Education</h3>
+        <div class="education-grid">
+          @for (edu of education(); track edu.degree) {
+            <div class="education-card">
+              <h4 class="education-degree">{{ edu.degree }}</h4>
+              <div class="education-institution">{{ edu.institution }}</div>
+              <div class="education-period">{{ edu.period }}</div>
+              <div class="education-location">{{ edu.location }}</div>
+              @if (edu.description) {
+                <p class="education-description">{{ edu.description }}</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
   </div>
 </section>
 
 <section id="projects">
   <div class="projects-container">
-    <h2 class="section-title reveal">Progetti in Evidenza</h2>
+    <h2 class="section-title reveal">Featured Projects</h2>
     <div class="projects-grid">
       @for (project of projects(); track project.title) {
         <div class="project-card reveal">
@@ -1391,10 +1458,10 @@
 
 <section id="contact">
   <div class="contact-container">
-    <h2 class="section-title reveal">Lavoriamo Insieme</h2>
+    <h2 class="section-title reveal">Let's Work Together</h2>
     <p class="contact-text reveal">
-      Hai un progetto interessante? Parliamone!<br>
-      Sono sempre aperto a nuove opportunità e collaborazioni.
+      Have an interesting project? Let's talk!<br>
+      I'm always open to new opportunities and collaborations.
     </p>
     <div class="contact-links reveal">
       <a href="https://github.com/Mikes-not-found" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub Profile">
