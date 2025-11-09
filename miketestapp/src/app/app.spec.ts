@@ -4,6 +4,18 @@ import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
+    // Mock IntersectionObserver
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).IntersectionObserver = class IntersectionObserver {
+      observe(): null { return null; }
+      disconnect(): null { return null; }
+      unobserve(): null { return null; }
+      takeRecords(): never[] { return []; }
+      root = null;
+      rootMargin = '';
+      thresholds = [];
+    };
+
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideZonelessChangeDetection()]
