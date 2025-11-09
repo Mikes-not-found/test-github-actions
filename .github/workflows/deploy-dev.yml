@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages (Dev)
+
+on:
+  push:
+    branches:
+      - develop  # Deploy automatico quando pushiamo su develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: miketestapp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./miketestapp
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./miketestapp
+
+      - name: Build for Development
+        run: npm run build -- --configuration development --base-href /test-github-actions/dev/
+        working-directory: ./miketestapp
+
+      - name: Deploy to GitHub Pages (Dev)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./miketestapp/dist/miketestapp/browser
+          destination_dir: dev
+          commit_message: 'Deploy development build'
