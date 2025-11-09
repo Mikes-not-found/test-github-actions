@@ -383,10 +383,10 @@
   <div class="nav-content">
     <div class="logo">MS</div>
     <ul class="nav-links">
-      <li><a (click)="scrollToSection('home')">Home</a></li>
-      <li><a (click)="scrollToSection('about')">About</a></li>
-      <li><a (click)="scrollToSection('projects')">Projects</a></li>
-      <li><a (click)="scrollToSection('contact')">Contact</a></li>
+      <li><a (click)="scrollToSection('home')" (keydown.enter)="scrollToSection('home')" tabindex="0" role="button">Home</a></li>
+      <li><a (click)="scrollToSection('about')" (keydown.enter)="scrollToSection('about')" tabindex="0" role="button">About</a></li>
+      <li><a (click)="scrollToSection('projects')" (keydown.enter)="scrollToSection('projects')" tabindex="0" role="button">Projects</a></li>
+      <li><a (click)="scrollToSection('contact')" (keydown.enter)="scrollToSection('contact')" tabindex="0" role="button">Contact</a></li>
     </ul>
   </div>
 </nav>
