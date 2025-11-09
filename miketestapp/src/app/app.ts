@@ -57,7 +57,7 @@ export class App implements OnInit {
     this.setupScrollAnimations();
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   onScroll(): void {
     this.scrollY.set(window.scrollY);
     this.updateParallaxElements();
