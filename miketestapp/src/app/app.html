@@ -977,6 +977,256 @@
       height: 25px;
     }
   }
+
+  /* Experience Section */
+  #experience {
+    background: linear-gradient(180deg, var(--light) 0%, #fff 100%);
+  }
+
+  .experience-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .experience-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary);
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+    margin: 0 auto 2rem;
+    display: block;
+  }
+
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 3px;
+  }
+
+  .timeline-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-item:nth-child(odd) {
+    flex-direction: row;
+  }
+
+  .timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .timeline-content {
+    width: 45%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 2px solid rgba(99, 102, 241, 0.1);
+    transition: all 0.3s;
+  }
+
+  .timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    z-index: 1;
+  }
+
+  .timeline-content.work {
+    border-left: 4px solid var(--primary);
+  }
+
+  .timeline-content.education {
+    border-left: 4px solid var(--accent);
+  }
+
+  .timeline-role {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-company {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-period {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-location {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .timeline-description {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .timeline-skill {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .certifications {
+    margin-top: 4rem;
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .cert-card {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 2rem;
+    border-radius: 1.5rem;
+    color: #fff;
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s;
+  }
+
+  .cert-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+  }
+
+  .cert-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .cert-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-issuer {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .cert-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .cert-link:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 968px) {
+    .timeline::before {
+      left: 20px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+      flex-direction: row;
+    }
+
+    .timeline-content {
+      width: calc(100% - 60px);
+      margin-left: 60px;
+    }
+
+    .timeline-dot {
+      left: 20px;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .profile-image {
+      width: 120px;
+      height: 120px;
+    }
+
+    .timeline-content {
+      padding: 1.5rem;
+    }
+
+    .timeline-role {
+      font-size: 1.2rem;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+    }
+
+    .cert-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 <nav [class.nav-scrolled]="scrollY() > 50">
   <div class="nav-content">
@@ -984,6 +1234,7 @@
     <ul class="nav-links">
       <li><a (click)="scrollToSection('home')" (keydown.enter)="scrollToSection('home')" tabindex="0" role="button">Home</a></li>
       <li><a (click)="scrollToSection('about')" (keydown.enter)="scrollToSection('about')" tabindex="0" role="button">About</a></li>
+      <li><a (click)="scrollToSection('experience')" (keydown.enter)="scrollToSection('experience')" tabindex="0" role="button">Experience</a></li>
       <li><a (click)="scrollToSection('projects')" (keydown.enter)="scrollToSection('projects')" tabindex="0" role="button">Projects</a></li>
       <li><a (click)="scrollToSection('contact')" (keydown.enter)="scrollToSection('contact')" tabindex="0" role="button">Contact</a></li>
     </ul>
@@ -1041,6 +1292,56 @@
             <div class="skill-tag">{{ skill }}</div>
           }
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="experience-container">
+    <div class="experience-header reveal">
+      <img [src]="profileImage" [alt]="name() + ' profile picture'" class="profile-image" />
+      <h2 class="section-title">Esperienza Professionale</h2>
+    </div>
+
+    <div class="timeline">
+      @for (exp of experiences(); track exp.company + exp.period) {
+        <div class="timeline-item reveal">
+          <div class="timeline-content" [class.work]="exp.type === 'work'" [class.education]="exp.type === 'education'">
+            <h3 class="timeline-role">{{ exp.role }}</h3>
+            <div class="timeline-company">{{ exp.company }}</div>
+            <div class="timeline-period">{{ exp.period }}</div>
+            <div class="timeline-location">{{ exp.location }}</div>
+            <p class="timeline-description">{{ exp.description }}</p>
+            @if (exp.skills.length > 0) {
+              <div class="timeline-skills">
+                @for (skill of exp.skills; track skill) {
+                  <span class="timeline-skill">{{ skill }}</span>
+                }
+              </div>
+            }
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      }
+    </div>
+
+    <div class="certifications reveal">
+      <h3 class="section-title">Certificazioni</h3>
+      <div class="cert-grid">
+        @for (cert of certifications(); track cert.name) {
+          <div class="cert-card">
+            <div class="cert-logo">{{ cert.logo }}</div>
+            <div class="cert-name">{{ cert.name }}</div>
+            <div class="cert-issuer">{{ cert.issuer }}</div>
+            <div class="cert-date">{{ cert.date }}</div>
+            @if (cert.credentialUrl) {
+              <a [href]="cert.credentialUrl" target="_blank" rel="noopener" class="cert-link">
+                Visualizza Credenziale →
+              </a>
+            }
+          </div>
+        }
       </div>
     </div>
   </div>
